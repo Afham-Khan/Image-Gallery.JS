@@ -1,0 +1,109 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 8%;
+    perspective: 1000px; /* 3D perspective */
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
+    transform-style: preserve-3d;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 15px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transform-origin: center;
+}
+
+/* Hover effect for 3D and pop-out animation */
+.gallery img:hover {
+    transform: scale(1.1) rotateY(10deg); /* 3D rotate with slight zoom */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Add a subtle pulse effect to images */
+.gallery img:hover:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    opacity: 0;
+    animation: pulse 0.8s forwards;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Additional hover effects for interactivity */
+.gallery img:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+}
+
+/* Smooth transition and rotating animation */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 5%;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 2%;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-gap: 10px;
+    }
+
+    .gallery img {
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .gallery img:hover {
+        transform: scale(1.05) rotateY(8deg);
+    }
+}
